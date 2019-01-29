@@ -186,6 +186,9 @@ func (r *Ref) Update(ctx context.Context, v map[string]interface{}) error {
 	if err != nil {
 		return err
 	}
+	if err := resp.CheckStatus(http.StatusOK); err == nil {
+		return nil
+	}
 	return resp.CheckStatus(http.StatusNoContent)
 }
 
